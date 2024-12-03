@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>All Questions</title>
+    <style>
+        .question-text {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .choices {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .choices li {
+            margin: 5px 0;
+            font-size: 1em;
+            padding: 5px;
+        }
+
+        .correct-answer {
+            background-color: yellow; 
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>All Questions</h1>
+    <ul>
+        {% for question in questions %}
+        <li>
+            <p class="question-text">{{ question.question_text }}</p> 
+            <ul class="choices">
+                {% for choice in question.choices %}
+                <li class="{% if loop.index0 == question.answer_index %}correct-answer{% endif %}">
+                    {{ choice }} 
+                </li>
+                {% endfor %}
+            </ul>
+        </li>
+        {% endfor %}
+    </ul>
+    <button onclick="location.href='/'">Back to Home</button>
+</body>
+</html>

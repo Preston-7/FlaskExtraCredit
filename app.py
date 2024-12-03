@@ -26,6 +26,21 @@ def create_app():
         """
 
         return vars(quizzer.get_random_question())
+    
+    @app.route('/all-questions')
+    def show_all_questions():
+        """Returns all the questions
+        """
+        question_dicts = [
+            {
+                "question_id": question.question_id,
+                "question_text": question.question_text,
+                "choices": question.choices,
+                "answer_index": question.answer_index,
+            }
+            for question in QUESTIONS
+        ]
+        return render_template('all_questions.html', questions=question_dicts)
 
     @app.route('/api/question/<question_id>/answer/<int:answer>')
     def check_answer(question_id: str, answer: int):
